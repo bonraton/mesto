@@ -1,11 +1,10 @@
-.popup-content {
-    min-width: 440px;
-    min-height: 330px;
+.popup__content {
     background-color: #fff;
-    position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 195px;
     border-radius: 10px;
+    box-sizing: border-box;
+    align-self: center;
 }
 
 @media screen and (max-width: 779px) {

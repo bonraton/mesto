@@ -1,11 +1,13 @@
 .popup-form__close-button {
-    line-height: 48px;
-    font-size: 60px;
-    color: #fff;
-    position: absolute;
-    top: 0;
-    transform: translate(410px, -45px) rotate(45deg);
+    padding: 0;
+    background: none;
+    background-image: url(../../../images/Close-Icon.svg);
+    width: 40px;
+    height: 40px;
+    border: none;
     cursor: pointer;
+    position: absolute;
+    transform: translate(310px, -330px);
     transition: opacity 1s linear;
 }
 
@@ -15,7 +17,6 @@
 
 @media screen and (max-width: 779px) {
     .popup-form__close-button {
-        transform: translate(220px, -45px) rotate(45deg);
-        font-size: 48px;
+        transform: translate(220px, -45px)
     }
 }
