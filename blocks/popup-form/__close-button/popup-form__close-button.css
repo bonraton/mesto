@@ -1,0 +1,21 @@
+.popup-form__close-button {
+    line-height: 48px;
+    font-size: 60px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    transform: translate(410px, -45px) rotate(45deg);
+    cursor: pointer;
+    transition: opacity 1s linear;
+}
+
+.popup-form__close-button:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 779px) {
+    .popup-form__close-button {
+        transform: translate(220px, -45px) rotate(45deg);
+        font-size: 48px;
+    }
+}

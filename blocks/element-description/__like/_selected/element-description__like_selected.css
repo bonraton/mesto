@@ -1,0 +1,8 @@
+.element-description__like_selected {
+    background-image: url(../../../../images/element-like_selected.svg);
+    width: 22px;
+    height: 19px;
+    margin: auto;
+    cursor: pointer;
+    display: none;
+}

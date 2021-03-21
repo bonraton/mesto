@@ -1,0 +1,7 @@
+.popup {
+    display: flex;
+    justify-content: center;
+    align-content: flex-end;
+    font-family: 'Inter', sans-serif, Arial;
+    visibility: hidden;
+}
