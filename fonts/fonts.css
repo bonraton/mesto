@@ -9,7 +9,6 @@
         url(../fonts/Inter/Inter-Medium.woff);
     font-family: 'Inter';
     font-weight: 500;
-    font-style: medium;
 }
 
 @font-face {
@@ -17,5 +16,4 @@
         url(../fonts/Inter/Inter-Black.woff);
     font-family: 'Inter';
     font-weight: 900;
-    font-style: black;
 }

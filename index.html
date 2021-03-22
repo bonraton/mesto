@@ -9,10 +9,10 @@
 </head>
 
 <body class="page">
+    <header class="header">
+        <img src="./images/logo.svg" alt="логотип" class="header__logo">
+    </header>
     <div class="page__container">
-        <header class="header">
-            <img src="./images/logo.svg" alt="логотип" class="header__logo">
-        </header>
         <main>
             <section class="profile">
                 <img src="./images/avatar.jpg" alt="аватар" class="profile__avatar">
@@ -73,17 +73,17 @@
         </footer>
         <div class="popup">
             <div class="popup__content">
-                <h2 class="popup__content-title">Редактировать профиль</h2>
+                <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup-form">
-                    <input type="text" value="Жак-Ив Кусто" id="profileNameInput" class="popup-form__input">
-                    <input type="text" value="Исследователь океана" id="profileDescriptionInput"
-                        class="popup-form__input">
-                    <input type="submit" value="Сохранить" class="popup-form__submit">
+                    <input type="text" name="Ваше имя" value="" class="popup-form__input popup-form__input_name">
+                    <input type="text" name="О себе" value="" class="popup-form__input popup-form__input_description">
+                    <input type="submit" name="сохранить" value="Сохранить" class="popup-form__submit">
                 </form>
-                <button type="reset" class="popup-form__close-button">
+                <button type="button" class="popup-form__close-btn"></button>
             </div>
         </div>
-        <script src="./index.js"></script>
+    </div>
+    <script src="./scripts/index.js"></script>
 
 
 </body>

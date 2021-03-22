@@ -4,8 +4,7 @@
     grid-template-columns: auto 24px;
     color: white;
     gap: 16px 18px;
-    justify-items: start;
-    align-items: center;
+    align-items: baseline;
 }
 
 @media screen and (max-width: 927px) {
@@ -19,5 +18,14 @@
     .profile__info {
         flex-direction: column;
         margin: 23px auto 36px auto;
+    }
+}
+
+@media screen and (max-width: 459px) {
+    .profile__info {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 23px auto 36px auto;
+        justify-content: center;
     }
 }
