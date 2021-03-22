@@ -2,7 +2,7 @@
 let popup = document.querySelector('.popup');
 let profile = document.querySelector('.profile');
 let profileEditBtn = profile.querySelector('.profile__edit-btn');
-let popupCloseBtn = popup.querySelector('.popup-form__close-btn');
+let popupCloseBtn = popup.querySelector('.popup__close-btn');
 let popupSubmitBtn = popup.querySelector('.popup-form__submit');
 
 // Переменные полей ввода
