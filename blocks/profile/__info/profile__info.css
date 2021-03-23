@@ -16,7 +16,6 @@
 
 @media screen and (max-width: 779px) {
     .profile__info {
-        flex-direction: column;
         margin: 23px auto 36px auto;
     }
 }
@@ -25,7 +24,6 @@
     .profile__info {
         flex-direction: row;
         flex-wrap: wrap;
-        margin: 23px auto 36px auto;
         justify-content: center;
     }
 }

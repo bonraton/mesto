@@ -1,14 +1,15 @@
 .popup__close-btn {
     padding: 0;
+    box-sizing: border-box;
     background: none;
     background-image: url(../../../images/Close-Icon.svg);
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border: none;
     outline: none;
     cursor: pointer;
     position: absolute;
-    transform: translate(410px, -385px);
+    transform: translate(400px, -400px);
     transition: opacity 1s linear;
 }
 

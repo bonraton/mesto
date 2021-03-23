@@ -5,6 +5,10 @@ let profileEditBtn = profile.querySelector('.profile__edit-btn');
 let popupCloseBtn = popup.querySelector('.popup__close-btn');
 let popupSubmitBtn = popup.querySelector('.popup-form__submit');
 
+// Переменные для сохранения введенных данных
+let profileName = profile.querySelector('.profile__name');
+let profileDescription = profile.querySelector('.profile__description');
+
 // Переменные полей ввода
 let profileNameInput = popup.querySelector('.popup-form__input_name');
 let profileDescriptionInput = popup.querySelector('.popup-form__input_description');
@@ -24,12 +28,6 @@ function popupHidden() {
 // вызов функциий  по клику
 profileEditBtn.addEventListener('click', popupVisible);
 popupCloseBtn.addEventListener('click', popupHidden);
-
-
-
-// Переменные для сохранения введенных данных
-let profileName = profile.querySelector('.profile__name');
-let profileDescription = profile.querySelector('.profile__description');
 
 //функция для сохранения введеных данных в профиль
 
