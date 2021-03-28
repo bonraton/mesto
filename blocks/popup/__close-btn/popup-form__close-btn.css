@@ -20,6 +20,6 @@
 @media screen and (max-width: 779px) {
     .popup__close-btn {
         background-image: url(../../../images/Close-Icon-mobile.svg);
-        transform: translate(235px, -400px);
+        transform: translate(235px, -385px);
     }
 }
