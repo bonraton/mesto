@@ -1,3 +1,4 @@
+<!-- Рад приветствовать! Проектная работа улет! Сложно, интересно, захватывающе! Буду с нетерпеньем ждать ревью. Спасибо вам =) -->
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -23,66 +24,60 @@
                 </div>
                 <button type="button" class="profile__add-btn"></button>
             </section>
+
             <section class="elements">
-                <div class="element">
-                    <img src="./images/baykal_01.jpg" alt="Байкал" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Байкал</h2>
-                        <button type="button" class="element__like element__like_selected"></button>
+                <template class="element-template">
+                    <div class="element">
+                        <img class="element__image">
+                        <button type="button" name="delete-btn" class="element__delete-btn"></button>
+                        <div class="element__description">
+                            <h2 class="element__title"></h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
                     </div>
-                </div>
-                <div class="element">
-                    <img src="./images/chukotka_01.jpg" alt="Чукотка" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Чукотка</h2>
-                        <button type="button" class="element__like element__like_selected"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/kamchatka_01.jpg" alt="Камчатка" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Камчатка</h2>
-                        <button type="button" class="element__like element__like_selected"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/altay_01.jpg" alt="Байкал" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Алтай</h2>
-                        <button type="button" class="element__like element__like_selected"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/kabardino-balkariya.jpg" alt="Кабардино-Балкария" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Кабардино-Балкария</h2>
-                        <button type="button" class="element__like element__like_selected"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/kalmykiya_01.jpg" alt="Калмыкия" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Калмыкия</h2>
-                        <button type="button" class="element__like element__like_selected"></button>
-                    </div>
-                </div>
+                </template>
             </section>
         </main>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2021 Олег Заболотский </p>
         </footer>
-        <div class="popup">
-            <div class="popup__content">
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup-form">
-                    <input type="text" name="Ваше имя" value="" class="popup-form__input popup-form__input_name">
-                    <input type="text" name="О себе" value="" class="popup-form__input popup-form__input_description">
-                    <input type="submit" name="сохранить" value="Сохранить" class="popup-form__submit">
-                </form>
-                <button type="button" class="popup__close-btn"></button>
-            </div>
+    </div>
+    <div class="popup" id="popupProfile">
+        <div class="popup__content">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form class="popup-form">
+                <input type="text" name="Ваше имя" value="" class="popup-form__input popup-form__input_name"
+                    id="popupCloseBtn">
+                <input type="text" name="О себе" value="" class="popup-form__input popup-form__input_description">
+                <input type="submit" name="сохранить" value="Сохранить" class="popup-form__submit">
+            </form>
+            <button type="button" class="popup__close-btn"></button>
         </div>
     </div>
+    <div class="popup" id="popupCards">
+        <div class="popup__content popup__content_places">
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup-form">
+                <input type="text" placeholder="Название" name="Ваше имя" value=""
+                    class="popup-form__input popup-form__input_name">
+                <input type="text" placeholder="Ссылка на картинку" name="О себе" value=""
+                    class="popup-form__input popup-form__input_description">
+                <input type="button" name="создать" value="создать" class="popup-form__submit">
+                <button type="button" class="popup__close-btn"></button>
+            </form>
+
+        </div>
+    </div>
+    <div class="popup popup_preview" id="popupLargeCard">
+        <div class="popup__content popup__content_preview">
+            <img class="popup__image">
+            <button type="button" class="popup__close-btn"></button>
+            <p class="popup__description"></p>
+        </div>
+
+    </div>
+
+    <script src="./scripts/images.js"></script>
     <script src="./scripts/index.js"></script>
 
 

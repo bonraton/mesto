@@ -7,6 +7,7 @@
     margin: 31px 30px 0 auto;
     transition: opacity 1s linear;
     border: none;
+    outline: none;
 }
 
 .element__like:hover {

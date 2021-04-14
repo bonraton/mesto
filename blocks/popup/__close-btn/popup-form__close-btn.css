@@ -9,8 +9,9 @@
     outline: none;
     cursor: pointer;
     position: absolute;
-    transform: translate(400px, -400px);
     transition: opacity 1s linear;
+    right: -40px;
+    top: -55px;
 }
 
 .popup__close-btn:hover {
@@ -20,6 +21,7 @@
 @media screen and (max-width: 779px) {
     .popup__close-btn {
         background-image: url(../../../images/Close-Icon-mobile.svg);
-        transform: translate(235px, -385px);
+        top: -45px;
+        right: -15px;
     }
 }
