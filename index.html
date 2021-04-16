@@ -1,4 +1,4 @@
-<!-- Рад приветствовать! Проектная работа улет! Сложно, интересно, захватывающе! Буду с нетерпеньем ждать ревью. Спасибо вам =) -->
+<!-- Анна, добрейшего времени суток! Попыхтел наславу, спешу порадовать вас внесенными правочками, и очень надеюсь, что не дождусь новых =) -->
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -46,10 +46,11 @@
         <div class="popup__content">
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup-form">
-                <input type="text" name="Ваше имя" value="" class="popup-form__input popup-form__input_name"
-                    id="popupCloseBtn">
-                <input type="text" name="О себе" value="" class="popup-form__input popup-form__input_description">
-                <input type="submit" name="сохранить" value="Сохранить" class="popup-form__submit">
+                <input type="text" name="profileName" value="" placeholder="Ваше Имя"
+                    class="popup-form__input popup-form__input_name" id="popupCloseBtn">
+                <input type="text" name="profileAbout" value="" placeholder="О себе"
+                    class="popup-form__input popup-form__input_description">
+                <input type="submit" name="submit" value="submit" class="popup-form__submit">
             </form>
             <button type="button" class="popup__close-btn"></button>
         </div>
@@ -58,11 +59,11 @@
         <div class="popup__content popup__content_places">
             <h2 class="popup__title">Новое место</h2>
             <form class="popup-form">
-                <input type="text" placeholder="Название" name="Ваше имя" value=""
+                <input type="text" placeholder="Название" name="cardName" value=""
                     class="popup-form__input popup-form__input_name">
-                <input type="text" placeholder="Ссылка на картинку" name="О себе" value=""
+                <input type="text" placeholder="Ссылка на картинку" name="cardLink" value=""
                     class="popup-form__input popup-form__input_description">
-                <input type="button" name="создать" value="создать" class="popup-form__submit">
+                <input type="submit" name="submit" value="создать" class="popup-form__submit">
                 <button type="button" class="popup__close-btn"></button>
             </form>
 
@@ -70,7 +71,7 @@
     </div>
     <div class="popup popup_preview" id="popupLargeCard">
         <div class="popup__content popup__content_preview">
-            <img class="popup__image">
+            <img src="#" alt="#" class="popup__image">
             <button type="button" class="popup__close-btn"></button>
             <p class="popup__description"></p>
         </div>
@@ -79,6 +80,7 @@
 
     <script src="./scripts/images.js"></script>
     <script src="./scripts/index.js"></script>
+    <script src='./scripts/traning.js'></script>
 
 
 </body>
