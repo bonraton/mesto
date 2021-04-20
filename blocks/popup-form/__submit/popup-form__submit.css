@@ -20,6 +20,12 @@
     opacity: .8;
 }
 
+.popup-form__submit:disabled {
+    background-color: #fff;
+    color: #000;
+    opacity: .3;
+}
+
 @media screen and (max-width: 779px) {
     .popup-form__submit {
         font-size: 14px;

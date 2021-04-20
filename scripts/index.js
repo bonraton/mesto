@@ -5,6 +5,8 @@ const cardTemplate = document.querySelector('.element-template').content;
 const largeCard = document.querySelector('.popup__image');
 
 //переменные попапов
+const popupsAll = document.querySelectorAll('.popup');
+const popupOverlay = document.querySelector('.popup');
 const popupProfile = document.querySelector('#popupProfile');
 const popupCards = document.querySelector('#popupCards');
 const popupLargeCard = document.querySelector('#popupLargeCard');
@@ -32,15 +34,44 @@ const cardInputTitle = popupCards.querySelector('.popup-form__input_name');
 const cardForm = popupCards.querySelector('.popup-form');
 const profileForm = popupProfile.querySelector('.popup-form');
 
-//функция открытия попапа
+
+// функция открытия попапа
 function openPopup(popup) {
     popup.classList.add('popup_visible');
+    document.addEventListener('keydown', closePopupByEsc);
 }
 
-//функция закрытия попапа
+// закрытие попапа
 function closePopup(popup) {
     popup.classList.remove('popup_visible');
 }
+
+const closePopupOverlayByClick = (evt) => {
+    const target = evt.target;
+    const popup = target.closest('.popup')
+    const closeButton = target.closest('.popup__close-btn');
+    if (target === popup || target === closeButton) {
+        closePopup(popup);
+    } 
+}
+
+
+//слушатели для всех попапов
+
+popupsAll.forEach((item) => {
+    item.addEventListener('click', closePopupOverlayByClick);
+    });
+
+
+const closePopupByEsc = (evt) => {
+    const key = evt.key;
+    if (key === 'Escape') {
+        popupsAll.forEach((popup) => {
+            closePopup(popup);
+        })
+    }
+}
+
 
 // функция для отображения данных из профиля в инпуте
 function transferProfileInputFormData() {
@@ -54,17 +85,9 @@ profileEditBtn.addEventListener('click', function () {
     openPopup(popupProfile);
 });
 
-profileCloseBtn.addEventListener('click', function () {
-    closePopup(popupProfile);
-});
-
 //открытие закрытие попап карточек
 cardAddBtn.addEventListener('click', function () {
     openPopup(popupCards);
-})
-
-cardsCloseBtn.addEventListener('click', function () {
-    closePopup(popupCards);
 })
 
 //функция для сохранения введеных данных в профиль
@@ -76,8 +99,8 @@ function submitData() {
 //функция отмены действия
 function submitProfileForm(evt) {
     evt.preventDefault();
-    submitData()
     closePopup(popupProfile);
+    submitData()
 }
 
 profileForm.addEventListener('submit', submitProfileForm);
@@ -128,11 +151,6 @@ function previewCard(evt) {
     largeCard.alt = target.alt
     cardInfo.textContent = target.alt
 }
-
-// закрытие превью карточки
-previewCloseBtn.addEventListener('click', function () {
-    closePopup(popupLargeCard);
-})
 
 //функция удаления карточки
 
