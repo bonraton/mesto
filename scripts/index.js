@@ -14,6 +14,7 @@ const popupLargeCard = document.querySelector('#popupLargeCard');
 //переменные кнопок
 const profileEditBtn = profile.querySelector('.profile__edit-btn');
 const profileCloseBtn = popupProfile.querySelector('.popup__close-btn');
+const profileSubmitBtn = popupProfile.querySelector('.popup-form__submit');
 const popupSubmitBtn = popupProfile.querySelector('.popup-form__submit');
 
 const cardsSubmitBtn = popupCards.querySelector('.popup-form__submit');
@@ -52,23 +53,21 @@ const closePopupOverlayByClick = (evt) => {
     const closeButton = target.closest('.popup__close-btn');
     if (target === popup || target === closeButton) {
         closePopup(popup);
-    } 
+    }
 }
 
-
 //слушатели для всех попапов
-
 popupsAll.forEach((item) => {
     item.addEventListener('click', closePopupOverlayByClick);
-    });
+});
 
 
 const closePopupByEsc = (evt) => {
+    const popup = document.querySelector('.popup_visible');
     const key = evt.key;
     if (key === 'Escape') {
-        popupsAll.forEach((popup) => {
-            closePopup(popup);
-        })
+        popup.classList.remove('popup_visible');
+        document.removeEventListener('keydown', closePopupByEsc);
     }
 }
 
@@ -79,13 +78,14 @@ function transferProfileInputFormData() {
     profileDescriptionInput.value = profileDescription.textContent;
 }
 
-//открытие закрытие попап профиля
+//открытие открытия попап профиля
 profileEditBtn.addEventListener('click', function () {
     transferProfileInputFormData();
     openPopup(popupProfile);
+    profileSubmitBtn.removeAttribute('disabled', true);
 });
 
-//открытие закрытие попап карточек
+//открытия попап карточек
 cardAddBtn.addEventListener('click', function () {
     openPopup(popupCards);
 })
