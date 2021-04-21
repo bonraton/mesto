@@ -8,6 +8,7 @@
     transition: opacity 1s linear;
     border: none;
     outline: none;
+    background-repeat: no-repeat;
 }
 
 .element__like:hover {
