@@ -45,6 +45,7 @@ function openPopup(popup) {
 // закрытие попапа
 function closePopup(popup) {
     popup.classList.remove('popup_visible');
+    document.removeEventListener('keydown', closePopupByEsc);
 }
 
 const closePopupOverlayByClick = (evt) => {
@@ -66,8 +67,7 @@ const closePopupByEsc = (evt) => {
     const popup = document.querySelector('.popup_visible');
     const key = evt.key;
     if (key === 'Escape') {
-        popup.classList.remove('popup_visible');
-        document.removeEventListener('keydown', closePopupByEsc);
+        closePopup(popup);
     }
 }
 
