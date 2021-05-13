@@ -46,6 +46,7 @@ const objectConfig = {
 const profile = document.querySelector('.profile');
 const cardsContainer = document.querySelector('.elements');
 
+
 //переменные попапов
 const popupsAll = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('#popupProfile');
@@ -68,6 +69,7 @@ const cardInputTitle = popupCards.querySelector('.popup-form__input_name');
 const cardForm = popupCards.querySelector('.popup-form');
 const profileForm = popupProfile.querySelector('.popup-form');
 
+
 // Открытие попапа
 export function openPopup(popup) {
     popup.classList.add('popup_visible');
@@ -75,9 +77,12 @@ export function openPopup(popup) {
 }
 
 // закрытие попапа
+// решил реализовать плавное закрытие таким образом, чтоб атрибут не было анимации при загрузке страницы. 
 function closePopup(popup) {
     popup.classList.remove('popup_visible');
     document.removeEventListener('keydown', closePopupByEsc);
+    resetInputErrors();
+    popup.setAttribute('style', 'transition: .3s ease-in-out');
 }
 
 // закрытие попапа по оверлею
@@ -102,6 +107,14 @@ const closePopupByEsc = (evt) => {
     if (key === 'Escape') {
         closePopup(popup);
     }
+}
+
+//cброс спанов при закрытии попапа
+const resetInputErrors = () => {
+    const spanErrors = Array.from(document.querySelectorAll('.popup-form__error'));
+    spanErrors.forEach((item) => {
+        item.classList.remove('popup-form__error_active')
+    })
 }
 
 // функция отображения данных из профиля в инпуте
@@ -138,21 +151,23 @@ function submitProfileForm(evt) {
 //слушатель формы профиля
 profileForm.addEventListener('submit', submitProfileForm);
 
+//добавление экземпляра класса карточки
+const createCard = (cardData, cardSelector) => {
+    const card = new Cards (cardData, cardSelector);
+    const cardElement = card.generateCard();
+    cardsContainer.prepend(cardElement);
+}
+
 //перебор начальных карточек
 initialCards.forEach((item) => {
-    const card = new Cards(item, '.element-template');
-    const cardElement = card.getCard();
-    cardsContainer.prepend(cardElement);
+    createCard(item, '.element-template')
 })
 
 // добавление новой карточки
 cardForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const card = new Cards ({name: cardInputTitle.value, link: cardInputLink.value}, '.element-template');
-    const cardElement = card.getCard();
-    cardsContainer.prepend(cardElement);
+    createCard({name: cardInputTitle.value, link: cardInputLink.value}, '.element-template')
     closePopup(popupCards);
-    cardForm.reset();
 })
 
 // Валидация форм
