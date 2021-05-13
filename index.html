@@ -45,16 +45,16 @@
         <div class="popup__content">
             <h2 class="popup__title">Редактировать профиль</h2>
 
-            <form name="profieForm" method="post" autocomplete="0" class="popup-form" novalidate>
+            <form name="profieForm" id="profie-form" method="post" autocomplete="0" class="popup-form" novalidate>
                 <section class="popup-form__section">
                     <input type="text" name="profileName" value="" placeholder="Ваше Имя"
-                        class="popup-form__input popup-form__input_name" maxlength="40" minlength="2" required>
-                    <span class="popup-form__error" id="profile-name-error"></span>
+                        class="popup-form__input popup-form__input_name" id="profile-input" maxlength="40" minlength="2" required>
+                    <span class="popup-form__error"></span>
                 </section>
                 <section class="popup-form__section">
                     <input type="text" name="profileAbout" value="" placeholder="О себе"
                         class="popup-form__input popup-form__input_description" minlength="2" maxlength="200" required>
-                    <span class="popup-form__error" id="profile-about-error"></span>
+                    <span class="popup-form__error"></span>
                 </section>
                 <input type="submit" name="submit" value="сохранить" class="popup-form__submit">
                 <button type="button" class="popup__close-btn"></button>
@@ -64,7 +64,7 @@
     <div class="popup" id="popupCards">
         <div class="popup__content popup__content_places">
             <h2 class="popup__title">Новое место</h2>
-            <form name="cards-form" class="popup-form" novalidate>
+            <form name="cards-form" id="cardsForm" class="popup-form" novalidate>
                 <section class="popup-form__section">
                     <input type="text" placeholder="Название" name="cardName" value=""
                         class="popup-form__input popup-form__input_name" minlength="2" maxlength="30" required>
@@ -75,7 +75,7 @@
                         class="popup-form__input popup-form__input_description" required>
                     <span class="popup-form__error" id="card-link-error"></span>
                 </section>
-                <input type="submit" name="submit" value="создать" class="popup-form__submit">
+                <input type="submit" name="submit" value="создать" class="popup-form__submit" disabled>
                 <button type="button" class="popup__close-btn"></button>
             </form>
 
@@ -90,10 +90,9 @@
 
     </div>
 
-    <script src="./scripts/images.js"></script>
-    <script src="./scripts/validate.js"></script>
-    <script src="./scripts/index.js"></script>
-
+    <script type="module" src="./scripts/FormValidation.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/Cards.js"></script>
 
 </body>
 
