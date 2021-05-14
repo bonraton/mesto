@@ -83,6 +83,7 @@ function closePopup(popup) {
     document.removeEventListener('keydown', closePopupByEsc);
     resetInputErrors();
     popup.setAttribute('style', 'transition: .3s ease-in-out');
+    cardForm.reset();
 }
 
 // закрытие попапа по оверлею

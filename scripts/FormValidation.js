@@ -8,7 +8,6 @@ export class FormValidation {
     _showInputError(inputElement, errorMessage) {
         const formSectionElement = inputElement.closest(this._objectConfig.formSection);
         const errorElement = formSectionElement.querySelector(this._objectConfig.formError);
-        errorMessage = inputElement.validationMessage;
         errorElement.textContent = errorMessage
         errorElement.classList.add(this._objectConfig.errorActiveClass);
     }
@@ -22,9 +21,9 @@ export class FormValidation {
     }
 
     //Валидация формы
-    _checkInputValidity(inputElement, errorMessage) {
+    _checkInputValidity(inputElement) {
         if (!inputElement.validity.valid) {
-            this._showInputError(inputElement, errorMessage);
+            this._showInputError(inputElement, inputElement.validationMessage);
         } else {
             this._hideInputError(inputElement);
         }
@@ -62,19 +61,16 @@ export class FormValidation {
         const inputList = Array.from(this._formElement.querySelectorAll(this._objectConfig.inputSelector))
         const buttonElement = this._formElement.querySelector(this._objectConfig.submitBtnSelector);
         inputList.forEach((inputElement) => {
-            this._checkInputValidity(inputElement);
-            this._toggleButtonSlate(inputList, buttonElement);
+            inputElement.addEventListener('input', () => {
+                this._checkInputValidity(inputElement);
+                this._toggleButtonSlate(inputList, buttonElement);
+            })
         });
     }
 
     enableValidation() {
-        this._formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
+        this._formElement.addEventListener('submit', evt =>  evt.preventDefault())
             this._setEventListeners();
-        });
-
-        this._formElement.addEventListener('input', () => {
-            this._setEventListeners();
-        })
+        };
     }
-}
+
