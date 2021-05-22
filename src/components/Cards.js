@@ -1,9 +1,9 @@
-import {openPopup} from './index.js'
 export class Cards {
-    constructor(cardData, cardSelector) {
+    constructor(cardData, cardSelector, handleCardClick) {
         this._name = cardData.name;
         this._image = cardData.link
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     // Достаем разметку из template
@@ -16,14 +16,6 @@ export class Cards {
     // Лайк
     _cardLike() {
         this._element.querySelector('.element__like').classList.toggle('element__like_active')
-    }
-
-    // Превью карточки
-    _previewCard() {
-        const largeCard = document.querySelector('.popup__image');
-        largeCard.src = this._image;
-        largeCard.alt = this._name;
-        openPopup(popupLargeCard);
     }
 
     // Удаление карточки
@@ -39,9 +31,8 @@ export class Cards {
         this._element.querySelector('.element__delete-btn').addEventListener('click', () => {
             this._removeCard();
         })
-
         this._element.querySelector('.element__image').addEventListener('click', () => {
-            this._previewCard();
+            this._handleCardClick(this._name, this._image);
         })
     }
 
