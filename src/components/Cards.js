@@ -21,6 +21,7 @@ export class Cards {
     // Удаление карточки
     _removeCard() {
         this._element.remove();
+        this._element = null;
     }
 
     // Слушатели лайк, удаление, открытие попапа
@@ -40,9 +41,10 @@ export class Cards {
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
-        this._element.querySelector('.element__image').src = this._image;
+        const elementImage = this._element.querySelector('.element__image');
+        elementImage.src = this._image;
+        elementImage.alt = this._name;
         this._element.querySelector('.element__title').textContent = this._name;
-        this._element.querySelector('.element__image').alt = this._name;
         return this._element;
     }
 }

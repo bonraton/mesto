@@ -8,7 +8,7 @@ export default class Popup {
         document.addEventListener('keyup', this._handleEscClose)
     }
 
-    close = () => {
+    close() {
         this._popup.classList.remove('popup_visible')
         document.removeEventListener('keyup', this._handleEscClose)
     }
@@ -22,6 +22,11 @@ export default class Popup {
     setEventListeners() {
         this._popup.querySelector('.popup__close-btn').addEventListener('click', () => {
             this.close();
+        })
+        this._popup.addEventListener('click', (evt) => {
+            if (evt.target === this._popup) {
+                this.close();
+            }
         })
     }
 }
