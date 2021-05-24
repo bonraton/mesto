@@ -20,7 +20,6 @@ import {profileNameInput} from '../utils/constants/constants.js';
 import {profileDescriptionInput} from '../utils/constants/constants.js';
 import {cardInputTitle} from '../utils/constants/constants.js';
 import {cardInputLink} from '../utils/constants/constants.js';
-import {profileSubmitBtn} from '../utils/constants/constants.js';
 
 // Валидация форм
 const addCardFormValidator = new FormValidation(objectConfig, cardForm);
@@ -35,20 +34,22 @@ const profileSubmitHandler = () => {
 }
 
 // попап профиля
-const addEditProfileForm = new PopupWithForm ('#popupProfile', profileSubmitHandler) 
+const addEditProfileForm = new PopupWithForm ('#popupProfile', profileSubmitHandler);
     addEditProfileForm.setEventListeners();
 
 // открытие попапа профиля
 profileEditBtn.addEventListener('click', () => {
+    addProfileFormValidator.enableSubmitButton();
+    const userData = profileInfo.getUserInfo();
+    profileNameInput.value = userData.name;
+    profileDescriptionInput.value = userData.description;
     addEditProfileForm.open();
-    profileSubmitBtn.disabled = false;
-    profileNameInput.value = profileInfo.getUserInfo().name;
-    profileDescriptionInput.value = profileInfo.getUserInfo().description;
+    addProfileFormValidator.clearAllspanErrors();
 })
 
+// попап превью карточки
 const previewCard = new PopupWithImage ('#popupLargeCard');
 previewCard.setEventListeners();
-
 const handleCardClick = (title, link) => {
     previewCard.open(title, link)
 }
@@ -66,13 +67,12 @@ const cardSection = new Section ({
         const card = createCard(data);
         return card.generateCard();
     }
-
 }, cardsContainerSelector);
 cardSection.render();
 
 //добавление новой карточки
 const cardFormSubmitHandler = () => {
-            const card = createCard({name: cardInputTitle.value, link: cardInputLink.value})
+            const card = createCard({name: cardInputTitle.value, link: cardInputLink.value});
     cardSection.addItem(card.generateCard());
 }
 
@@ -82,5 +82,7 @@ addEditCardForm.setEventListeners();
 
 // открытие попапа карточек
 cardAddBtn.addEventListener('click', () => {
+    addCardFormValidator.disableSubmitButton();
+    addCardFormValidator.clearAllspanErrors();
     addEditCardForm.open();
-})
+});

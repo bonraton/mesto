@@ -25,16 +25,8 @@ export default class PopupWithForm extends Popup {
         })
     }
 
-    _removeSpans() {
-        const spans = Array.from(this._form.querySelectorAll('.popup-form__error'));
-        spans.forEach(item => {
-            item.classList.remove('popup-form__error_active')
-        })
-    }
-
     close() {
         super.close();
-        this._removeSpans();
         this._form.reset();
     }
 }

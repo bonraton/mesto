@@ -43,7 +43,6 @@ export const cardsContainerSelector = '.elements';
 //переменные кнопок
 export const profileEditBtn = document.querySelector('.profile__edit-btn');
 export const cardAddBtn = document.querySelector('.profile__add-btn')
-export const profileSubmitBtn = document.querySelector('.popup-form__submit');
 
 // Переменные полей ввода
 export const profileNameInput = popupProfile.querySelector('.popup-form__input_name');
