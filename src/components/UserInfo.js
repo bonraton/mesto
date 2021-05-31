@@ -23,5 +23,3 @@ export class UserInfo {
         this._avatarLink.src = avatar
     }
 }
-
-// добавить аватар
