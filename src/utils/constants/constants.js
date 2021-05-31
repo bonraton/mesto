@@ -43,6 +43,7 @@ export const cardsContainerSelector = '.elements';
 //переменные кнопок
 export const profileEditBtn = document.querySelector('.profile__edit-btn');
 export const cardAddBtn = document.querySelector('.profile__add-btn')
+export const avatarEdit = document.querySelector('.profile__avatar-overlay');
 
 // Переменные полей ввода
 export const profileNameInput = popupProfile.querySelector('.popup-form__input_name');
@@ -51,3 +52,5 @@ export const cardInputLink = popupCards.querySelector('.popup-form__input_descri
 export const cardInputTitle = popupCards.querySelector('.popup-form__input_name');
 export const cardForm = popupCards.querySelector('.popup-form');
 export const profileForm = popupProfile.querySelector('.popup-form');
+export const avatarForm = popupAvatar.querySelector('.popup-form');
+export const avatarInputLink = avatarForm.querySelector('.popup-form__input');

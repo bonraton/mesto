@@ -8,9 +8,9 @@ export class Section {
         this._renderer = renderer;
     }
 
-    render() {
-        this._initialItems.forEach(data => {
-            this._container.append(this._renderer(data))
+    render(items) {
+        items.forEach(item => {
+            this._container.append(this._renderer(item))
         })
     }
 
