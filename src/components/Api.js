@@ -102,27 +102,27 @@ export class Api {
         .then(result => result.json())
     }
 
-    sendLike(id) {
-        return fetch(`${this._adress}/cards/likes/${id}`, {
-            method: 'PUT',
-            headers: {
-                authorization: this._token,
-            },
-        })
-        .then((res) => {
-        if (res.ok) {
-            return res.json();
+sendLike(data) {
+    return fetch(`${this._adress}/cards/likes/${data}`, {
+        method: 'PUT', 
+        headers: {
+            authorization: this._token,
         }
-        })
-    }
+    })
+    .then(result => {
+        result.json();
+    })
+}
 
-    deleteLike(id) {
-        return fetch(`${this._adress}/cards/likes/${id}`, {
-            method: 'DELETE',
-            headers: {
-                authorization: this._token
-            }
-        })
-        .then(result => {result.json()})
-    }
+deleteLike(data) {
+    return fetch(`${this._adress}/cards/likes/${data}`, {
+        method: 'DELETE', 
+        headers: {
+            authorization: this._token,
+        }
+    })
+    .then(result => {
+        result.json();
+    })
+}
 }

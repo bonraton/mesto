@@ -23,16 +23,17 @@ export class Cards {
     // Лайк
     _cardLike() {
         const like = this._element.querySelector('.element__like');
-
-            this._sendLike(this._ownerId)
-            this.getCounts();
-
-
         like.classList.toggle('element__like_active');
+        if (this._likesId !== this._ownerId) {
+            this._sendLike(this._cardId);
+        } else {
+            this._deleteLike(this._cardId);
+        }
+        // this.getCounts();
     }
 
     _hideDeleteBtn() {
-        if (this._ownerId !== "ad2870556030e9d944e8820b") {
+        if (this._likesId !== this._ownerId) {
             this._element.querySelector('.element__delete-btn').classList.add('element__delete-btn_inactive');
         } else {
             this._element.querySelector('.element__delete-btn').classList.remove('element__delete-btn_inactive');
@@ -57,7 +58,7 @@ export class Cards {
             })
             
         this._element.querySelector('.element__image').addEventListener('click', () => {
-            this._handleCardClick();
+            this._handleCardClick(this._image, this._name);
         })
     }
 

@@ -83,19 +83,12 @@ avatarEdit.addEventListener('click', () => {
 //     previewCard.open(title, link)
 // }
     // попап превью карточки
-// const previewCard = new PopupWithImage ('#popupLargeCard');
-// previewCard.setEventListeners();
-// const handleCardClick = (title, link) => {
-//     previewCard.open(title, link)
-// }
+const previewCard = new PopupWithImage ('#popupLargeCard');
+previewCard.setEventListeners();
 
-
-const previewCard = new PopupWithImage ('#popupLargeCard'); 
-previewCard.setEventListeners(); 
-const handleCardClick = (title, link) => { 
-    previewCard.open(title, link) 
-} 
-
+function handleCardClick (name, image) {
+    previewCard.open(name, image);
+}
 
 
 const cardSection = new Section ({
@@ -114,13 +107,14 @@ function createCard (data) {
 
 function sendLike(data) {
     api.sendLike(data);
-    console.log(data)
 }
 
 function deleteLike(data) {
-    api.sendLike(data);
-    console.log(data)
+    api.deleteLike(data);
 }
+
+
+
 
 let cardToDelete = null
 function deleteCardClick (data) {
