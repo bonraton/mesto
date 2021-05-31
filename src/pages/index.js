@@ -45,8 +45,6 @@ const addEditCardForm = new PopupWithForm ('#popupCards', () => {
 });
 addEditCardForm.setEventListeners();
 
-    // попап превью карточки
-const previewCard = new PopupWithImage ('#popupLargeCard');
 
 // попап аватара
 const addEditAvatarForm = new PopupWithForm('#popupAvatar', () => {
@@ -80,10 +78,24 @@ avatarEdit.addEventListener('click', () => {
 })
 
 // открытие превью карточки
-previewCard.setEventListeners();
-const handleCardClick = (title, link) => {
-    previewCard.open(title, link)
-}
+// previewCard.setEventListeners();
+// const handleCardClick = (title, link) => {
+//     previewCard.open(title, link)
+// }
+    // попап превью карточки
+// const previewCard = new PopupWithImage ('#popupLargeCard');
+// previewCard.setEventListeners();
+// const handleCardClick = (title, link) => {
+//     previewCard.open(title, link)
+// }
+
+
+const previewCard = new PopupWithImage ('#popupLargeCard'); 
+previewCard.setEventListeners(); 
+const handleCardClick = (title, link) => { 
+    previewCard.open(title, link) 
+} 
+
 
 
 const cardSection = new Section ({
@@ -96,16 +108,32 @@ const cardSection = new Section ({
 
 
 function createCard (data) {
-    const card = new Cards (data, '.element-template', handleCardClick, deleteCardClick(data._id))
+    const card = new Cards (data, '.element-template', handleCardClick, deleteCardClick, sendLike, deleteLike)
     return card;
 }
 
+function sendLike(data) {
+    api.sendLike(data);
+    console.log(data)
+}
+
+function deleteLike(data) {
+    api.sendLike(data);
+    console.log(data)
+}
+
+let cardToDelete = null
 function deleteCardClick (data) {
+    cardToDelete = data
     const deleteCardPopup = new PopupWithForm ('#popupDelete', () => {
         deleteCard()}) 
     deleteCardPopup.open();
     deleteCardPopup.setEventListeners();
-    api.deleteCard(data._id)
+    api.deleteCard(data._cardId)
+}
+
+function deleteCard() {
+    cardToDelete._element.remove();
 }
 
 
