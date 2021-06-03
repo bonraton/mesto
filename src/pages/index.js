@@ -77,12 +77,6 @@ avatarEdit.addEventListener('click', () => {
     addAvatarFormValidator.disableSubmitButton();
 })
 
-// открытие превью карточки
-// previewCard.setEventListeners();
-// const handleCardClick = (title, link) => {
-//     previewCard.open(title, link)
-// }
-    // попап превью карточки
 const previewCard = new PopupWithImage ('#popupLargeCard');
 previewCard.setEventListeners();
 
@@ -99,22 +93,11 @@ const cardSection = new Section ({
     }
 }, cardsContainerSelector);
 
-
+// х
 function createCard (data) {
-    const card = new Cards (data, '.element-template', handleCardClick, deleteCardClick, sendLike, deleteLike)
+    const card = new Cards (data, '.element-template', handleCardClick, deleteCardClick, addLike, removeLike)
     return card;
 }
-
-function sendLike(data) {
-    api.sendLike(data);
-}
-
-function deleteLike(data) {
-    api.deleteLike(data);
-}
-
-
-
 
 let cardToDelete = null
 function deleteCardClick (data) {
@@ -153,7 +136,6 @@ const api = new Api ('https://mesto.nomoreparties.co/v1/cohort-24', '0ee77e54-46
     api.getCards()
     .then((result => {
         cardSection.render(result)
-        console.log(result)
     }))
 
 // отправляем аватарку
@@ -183,6 +165,25 @@ const avatarSubmitHandler = () => {
     sendAvatar();
 }
 
+    // let cardLike = null;
+function addLike (data) {
+    // cardLike = data
+    api.sendLike(data._cardId)
+    .then(data => {
+        console.log(data);
+        // cardLike.countLikes();
+    })
+}
+
+    let cardDisike = null;
+function removeLike (data) {
+    cardDisike = data
+    api.removeLike(data._cardId)
+    .then(data => {
+        console.log(data)
+
+    })
+} 
 
 
 

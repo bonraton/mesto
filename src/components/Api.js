@@ -102,19 +102,24 @@ export class Api {
         .then(result => result.json())
     }
 
-sendLike(data) {
+    sendLike(data) {
     return fetch(`${this._adress}/cards/likes/${data}`, {
-        method: 'PUT', 
+        method: 'PUT',
         headers: {
             authorization: this._token,
+            'Content-Type': 'application/json', 
         }
     })
     .then(result => {
-        result.json();
+        if (result.ok) {
+            return result.json()
+        } else {
+            return Promise.reject('Ошибка')
+        }
     })
 }
 
-deleteLike(data) {
+    removeLike (data) {
     return fetch(`${this._adress}/cards/likes/${data}`, {
         method: 'DELETE', 
         headers: {
@@ -122,7 +127,11 @@ deleteLike(data) {
         }
     })
     .then(result => {
-        result.json();
+        if (result.ok) {
+            return result.json()
+        } else {
+            return Promise.reject('Ошибка')
+        }
     })
 }
 }
