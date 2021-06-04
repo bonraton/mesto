@@ -15,8 +15,6 @@
     <div class="page__container">
         <main>
             <section class="profile">
-
-                <!-- <img src="<%=require('../images/avatar.jpg')%>" alt="аватар" class="profile__avatar"> -->
                 <img src="<%=require('../images/avatar.jpg')%>" alt="аватар" class="profile__avatar">
                 <div class="profile__avatar-overlay">
                     <button type="button" class="profile__avatar-edit-btn"></button>
@@ -111,9 +109,9 @@
             <h2 class="popup__title">Обновить аватар</h2>
             <form name="editAvatarForm" class="popup-form">
                 <section class="popup-form__section">
-                <input type="url" placeholder="Ссылка на аватар" name="avatarLink" value="" class="popup-form__input"
-                    required>
-                <span class="popup-form__error" id="card-name-error"></span>
+                    <input type="url" placeholder="Ссылка на аватар" name="avatarLink" value=""
+                        class="popup-form__input" required>
+                    <span class="popup-form__error" id="card-name-error"></span>
                 </section>
                 <button type="button" class="popup__close-btn"></button>
                 <input type="submit" name="submit" value=" Сохранить" class="popup-form__submit">
