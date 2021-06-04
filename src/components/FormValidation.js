@@ -1,10 +1,10 @@
 export class FormValidation {
-constructor(objectConfig, formElement) {
-    this._objectConfig = objectConfig;
-    this._formElement = formElement;
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._objectConfig.inputSelector));
-    this._spanList = Array.from(this._formElement.querySelectorAll(this._objectConfig.formError));
-    this._buttonElement = this._formElement.querySelector(this._objectConfig.submitBtnSelector);
+    constructor(objectConfig, formElement) {
+        this._objectConfig = objectConfig;
+        this._formElement = formElement;
+        this._inputList = Array.from(this._formElement.querySelectorAll(this._objectConfig.inputSelector));
+        this._spanList = Array.from(this._formElement.querySelectorAll(this._objectConfig.formError));
+        this._buttonElement = this._formElement.querySelector(this._objectConfig.submitBtnSelector);
     }
 
     //показать ошибку

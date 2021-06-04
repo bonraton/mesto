@@ -3,28 +3,37 @@ export class Api {
         this._adress = adress;
         this._token = token;
     }
-
-    //забираем карточки
+    
+// Проверяем статус запроса    
+    _getResponseData(result) {
+            if (result.ok) {
+                return result.json();
+            } else {
+                return Promise.reject(`Ошибка: ${result.status}`); 
+            }
+    }
+    
+// Собираем карточки    
     getCards() {
         return fetch(`${this._adress}/cards/`, {
                 headers: {
                     authorization: this._token,
                 }
             })
-            .then(result => result.json())
+            .then((result) => this._getResponseData(result))
     }
 
-    //берем данные профиля
+// Берем данные профиля
     getProfileInfo() {
         return fetch(`${this._adress}/users/me`, {
                 headers: {
                     authorization: this._token,
                 }
             })
-            .then(result => result.json())
+            .then(result => this._getResponseData(result))
     }
 
-    //редактируем данные профиля
+// Редактируем данные профиля
     editProfileInfo(profileName, profileDescription) {
         return fetch(`${this._adress}/users/me`, {
                 method: 'PATCH',
@@ -35,18 +44,12 @@ export class Api {
                 body: JSON.stringify({
                     name: profileName,
                     about: profileDescription,
-                    // avatar: avatar
                 })
             })
-            .then(result => {
-                if (result.ok) {
-                    return result.json()
-                } else {
-                    return Promise.reject('Ошибка')
-                }
-            })
+            .then(result => this._getResponseData(result))
     }
 
+// Редактируем аватар
     editAvatarInfo(avatar) {
         return fetch(`${this._adress}/users/me/avatar`, {
                 method: 'PATCH',
@@ -58,16 +61,10 @@ export class Api {
                     avatar: avatar
                 })
             })
-            .then(result => {
-                if (result.ok) {
-                    return result.json()
-                } else {
-                    return Promise.reject('Ошибка')
-                }
-            })
+            .then(result => this._getResponseData(result))
     }
 
-    //отправляем карточку
+// Отправляем карточку
     postCard({
         cardName,
         cardLink
@@ -83,15 +80,10 @@ export class Api {
                     link: cardLink
                 })
             })
-            .then(result => {
-                if (result.ok) {
-                    return result.json()
-                } else {
-                    return Promise.reject('Ошибка')
-                }
-            })
+            .then(result => this._getResponseData(result))
     }
-
+    
+// Удаляем карточку
     deleteCard(id) {
         return fetch(`${this._adress}/cards/${id}`, {
             method: 'DELETE',
@@ -99,30 +91,29 @@ export class Api {
                 authorization: this._token,
             },
         })
-        .then(result => result.json())
+        .then(result => this._getResponseData(result))
     }
 
-sendLike(data) {
+// Отправляем лайк
+    sendLike(data) {
     return fetch(`${this._adress}/cards/likes/${data}`, {
-        method: 'PUT', 
+        method: 'PUT',
         headers: {
             authorization: this._token,
+            'Content-Type': 'application/json', 
         }
     })
-    .then(result => {
-        result.json();
-    })
+    .then(result => this._getResponseData(result))
 }
 
-deleteLike(data) {
+// Удаляем лайк
+    removeLike (data) {
     return fetch(`${this._adress}/cards/likes/${data}`, {
         method: 'DELETE', 
         headers: {
             authorization: this._token,
         }
     })
-    .then(result => {
-        result.json();
-    })
+    .then(result => this._getResponseData(result))
 }
 }
