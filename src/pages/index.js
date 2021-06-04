@@ -89,21 +89,21 @@ const cardSection = new Section ({
     renderer: 
     function (data) {
         const card = createCard(data);
-        return card.generateCard();
+        return card.generateCard()
     }
 }, cardsContainerSelector);
 
 // х
 function createCard (data) {
     const card = new Cards (data, '.element-template', handleCardClick, deleteCardClick, addLike, removeLike)
-    return card;
-}
+    return card
+};
 
 let cardToDelete = null
 function deleteCardClick (data) {
     cardToDelete = data
     const deleteCardPopup = new PopupWithForm ('#popupDelete', () => {
-        deleteCard()}) 
+        deleteCard()})
     deleteCardPopup.open();
     deleteCardPopup.setEventListeners();
     api.deleteCard(data._cardId)
@@ -114,29 +114,30 @@ function deleteCard() {
 }
 
 
-//добавление новой карточки
 const cardFormSubmitHandler = () => {
-            const card = createCard({name: cardInputTitle.value, link: cardInputLink.value, likes: '', owner: ''});            
-    cardSection.addItem(card.generateCard());
-    api.postCard({cardName: cardInputTitle.value, cardLink: cardInputLink.value}).then(result => {
-        cardSection.addItem(createCard(result))
+    const card = createCard({name: cardInputTitle.value, link: cardInputLink.value, likes: [], owner: ''});
+api.postCard({cardName: cardInputTitle.value, cardLink: cardInputLink.value})
+.then(result => {
+cardSection.addItem(card.generateCard())
+card._cardId = result._id
+card._ownerId = 'ad2870556030e9d944e8820b'
+console.log(card)
+card.showhideBtn();
+})
+};
+
+let like = null
+function addLike (data) {
+    like = data
+    api.sendLike(data._cardId)
+    .then(result => {
+        console.log(result)
+        like._element.querySelector('.element__like-counter').textContent = result.likes.length        // like._element.querySelector('.element__like-counter') =+ 1``
     })
 }
 
 const api = new Api ('https://mesto.nomoreparties.co/v1/cohort-24', '0ee77e54-461c-46fa-a82e-c4309127089b')
 
-//Cобираем данные профиля
-    api.getProfileInfo()
-    .then(result => {
-        profileInfo.setUserInfo(result.name, result.about);
-        profileInfo.setUserAvatar(result.avatar);
-    })
-
-// Собираем данные карточек
-    api.getCards()
-    .then((result => {
-        cardSection.render(result)
-    }))
 
 // отправляем аватарку
 function sendAvatar() {
@@ -165,26 +166,39 @@ const avatarSubmitHandler = () => {
     sendAvatar();
 }
 
-    // let cardLike = null;
-function addLike (data) {
-    // cardLike = data
-    api.sendLike(data._cardId)
-    .then(data => {
-        console.log(data);
-        // cardLike.countLikes();
+
+let dislike = null
+function removeLike (data) {
+    dislike = data
+    api.removeLike(data._cardId)
+    .then(result => {
+        console.log('dislike')
+        console.log(result.likes.length)
+        dislike._element.querySelector('.element__like-counter').textContent = result.likes.length
     })
 }
 
-    let cardDisike = null;
-function removeLike (data) {
-    cardDisike = data
-    api.removeLike(data._cardId)
-    .then(data => {
-        console.log(data)
+Promise.all([api.getProfileInfo(), api.getCards()])
+.then(([userData, cards]) => {
+    profileInfo.setUserInfo(userData.name, userData.about)
+    profileInfo.setUserAvatar(userData.avatar)
+    cardSection.render(cards)
+})
 
-    })
-} 
 
+//Cобираем данные профиля
+    // api.getProfileInfo()
+    // .then(result => {
+    //     profileInfo.setUserInfo(result.name, result.about);
+    //     profileInfo.setUserAvatar(result.avatar);
+    // })
+
+// Собираем данные карточек
+    // api.getCards()
+    // .then((result => {
+    //     cardSection.render(result)
+    //     console.log(result)
+    // }))
 
 
 

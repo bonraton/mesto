@@ -4,6 +4,13 @@ export class Api {
         this._token = token;
     }
 
+    _getResponseData(res) {
+        if (!res.ok) {
+            return Promise.reject(`Ошибка: ${res.status}`); 
+        }
+        return res.json();
+    } 
+
     //забираем карточки
     getCards() {
         return fetch(`${this._adress}/cards/`, {
@@ -67,7 +74,7 @@ export class Api {
             })
     }
 
-    //отправляем карточку
+    // отправляем карточку
     postCard({
         cardName,
         cardLink
@@ -91,6 +98,33 @@ export class Api {
                 }
             })
     }
+
+    // postCard(
+    //     {name,
+    //     link}
+    // ) {
+    //     return fetch(`${this._adress}/cards`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 authorization: this._token,
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({
+    //                 name: name,
+    //                 link: link,
+    //                 likes: [],
+    //                 owner: ''
+    //             })
+    //         })
+    //         .then(result => {
+    //             if (result.ok) {
+    //                 return result.json()
+    //             } else {
+    //                 return Promise.reject('Ошибка')
+    //             }
+    //         })
+    // }
+    
 
     deleteCard(id) {
         return fetch(`${this._adress}/cards/${id}`, {

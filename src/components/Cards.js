@@ -35,26 +35,45 @@ export class Cards {
 
 
     _cardLikeHandler() {
-        if (this._hasLikedByMe()) {
-            this._addLike(this)
+        if (this._element.querySelector('.element__like_active')) {
             this._cardLikeToggle()
+            this._removeLike(this)
             // this.countLikes();
         } else {
-            this._removeLike(this)
-            this._cardLikeToggle();
+            this._cardLikeToggle()
+            this._addLike(this)
             // this.countLikes();
         }
     }
 
 
+    getMineLikes() {
+        if (this._hasLikedByMe()){
+            this._element.querySelector('.element__like').classList.add('element__like_active')
+        } else {
+            this._element.querySelector('.element__like').classList.remove('element__like_active')
+        }
+    }
+
+
+    showhideBtn() {
+        this._element.querySelector('.element__delete-btn').classList.remove('element__delete-btn_inactive');
+    }
     
     _hideDeleteBtn() {
         if (this._ownerId !== "ad2870556030e9d944e8820b") {
             this._element.querySelector('.element__delete-btn').classList.add('element__delete-btn_inactive');
-        } else {
-            this._element.querySelector('.element__delete-btn').classList.remove('element__delete-btn_inactive');
+        // } 
+        // else {
+        //     this._element.querySelector('.element__delete-btn').classList.add('element__delete-btn_inactive');
         }
     }
+
+//     _hideDeleteBtn() {
+//     if (this._ownerId !== "ad2870556030e9d944e8820b") {
+//         this._showhideBtn()
+//     }
+// }
 
     countLikes() {
         this._element.querySelector('.element__like-counter').textContent = this._counterSpan;
@@ -66,8 +85,9 @@ export class Cards {
 
     // Слушатели лайк, удаление, открытие попапа
     _setEventListeners() {
-        this._element.querySelector('.element__like').addEventListener('click', () => {
+        this._element.querySelector('.element__like').addEventListener('click', (evt) => {
             this._cardLikeHandler()
+            console.log(evt.target.closest)
                 })
         this._element.querySelector('.element__delete-btn').addEventListener('click', () => {
                 this._deleteCardClick(this)
@@ -81,13 +101,14 @@ export class Cards {
     // Создаем карточку
     generateCard() {
         this._element = this._getTemplate();
-        this._setEventListeners();
-        this.countLikes();
-        this._hideDeleteBtn();
+        this.getMineLikes()
+                this._element.querySelector('.element__title').textContent = this._name;
         const elementImage = this._element.querySelector('.element__image');
         elementImage.src = this._image;
         elementImage.alt = this._name;
-        this._element.querySelector('.element__title').textContent = this._name;
+        this._setEventListeners();
+        this.countLikes();
+        this._hideDeleteBtn();
         return this._element;
     }
 }

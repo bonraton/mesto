@@ -66,6 +66,8 @@ constructor(objectConfig, formElement) {
         }
     }
 
+
+
     //слушатели форм
     _setEventListeners() {
         this._inputList.forEach((inputElement) => {
