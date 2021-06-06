@@ -21,13 +21,13 @@ export class Cards {
     }
 
     // переключатель состояния лайка
-    _cardLikeToggle() {
+    cardLikeToggle() {
         const like = this._element.querySelector('.element__like');
         like.classList.toggle('element__like_active');
     }
 
     //проверяем наличие моего лайка в карточке
-    _hasLikedByMe() {
+    hasLikedByMe() {
         return this._likes.some((item) => {
             return (item._id === "ad2870556030e9d944e8820b")
         })
@@ -36,17 +36,14 @@ export class Cards {
     // отправляем/удаляем лайк с сервера
     _cardLikeHandler() {
         if (this._element.querySelector('.element__like_active')) {
-            this._cardLikeToggle()
             this._removeLike(this)
         } else {
-            this._cardLikeToggle()
             this._addLike(this)
         }
     }
-
     //отрисовка лайков при загрузке страницы
     getMineLikes() {
-        if (this._hasLikedByMe()) {
+        if (this.hasLikedByMe()) {
             this._element.querySelector('.element__like').classList.add('element__like_active')
         } else {
             this._element.querySelector('.element__like').classList.remove('element__like_active')
@@ -59,15 +56,23 @@ export class Cards {
     }
 
     // прячем кнопки удаления на карточках
-    _hideDeleteBtn() {
+    _hideDeleteBtn(id) {
         if (this._ownerId !== "ad2870556030e9d944e8820b") {
             this._element.querySelector('.element__delete-btn').classList.add('element__delete-btn_inactive');
         }
     }
 
-    // отрисовка кол-ва лайков
+    // отрисовка кол-ва лайков, +1, -1 к счетчику
     countLikes() {
         this._element.querySelector('.element__like-counter').textContent = this._counterSpan;
+    }
+
+    addOneLike() {
+        this._element.querySelector('.element__like-counter').textContent  = this._counterSpan += 1
+    }
+
+    removeOneLike() {
+        this._element.querySelector('.element__like-counter').textContent = this._counterSpan -= 1
     }
 
     //удаление карточки
@@ -92,11 +97,11 @@ export class Cards {
     // Создаем карточку
     generateCard() {
         this._element = this._getTemplate();
-        this.getMineLikes()
         this._element.querySelector('.element__title').textContent = this._name;
         const elementImage = this._element.querySelector('.element__image');
         elementImage.src = this._image;
         elementImage.alt = this._name;
+        this.getMineLikes()
         this._setEventListeners();
         this.countLikes();
         this._hideDeleteBtn();
