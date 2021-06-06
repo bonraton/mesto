@@ -103,35 +103,7 @@ const deleteCardPopup = new PopupWithForm('#popupDelete', () => {
 })
 deleteCardPopup.setEventListeners();
 
-//удаляем карточку, закрываем попап
-function deleteCard() {
-    cardToDelete.removeCard();
-    deleteCardPopup.close()
-}
-
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-24', '0ee77e54-461c-46fa-a82e-c4309127089b')
-
-// отправляем аватар
-function sendAvatar() {
-    addEditAvatarForm.changeSubmitBtnCondition('Сохранение...');
-    api.editAvatarInfo(avatarInputLink.value)
-        .then(result => {
-            return result
-        })
-        .catch(e => console.log('Ошибка при получении данных'))
-        .finally(() => addEditAvatarForm.changeSubmitBtnCondition('Сохранить'))
-}
-
-// отправляем профиль
-function editProfileServ() {
-    addEditProfileForm.changeSubmitBtnCondition('Сохранение...');
-    api.editProfileInfo(profileNameInput.value, profileDescriptionInput.value)
-        .then(result => {
-            return result
-        })
-        .catch(e => console.log('Ошибка при получении данных'))
-        .finally(() => addEditProfileForm.changeSubmitBtnCondition('Сохранить'))
-}
 
 // отправляем карточку
 const cardFormSubmitHandler = () => {
@@ -149,7 +121,7 @@ const cardFormSubmitHandler = () => {
         .then(result => {
             cardSection.addItem(card.generateCard())
             card._cardId = result._id
-            card._ownerId = 'ad2870556030e9d944e8820b'
+            card._ownerId = userInfo._id
             card.showDeleteBtn();
             addEditCardForm.close();
         })
@@ -159,39 +131,44 @@ const cardFormSubmitHandler = () => {
 
 // удаляем карточку с сервера
 let cardToDelete = null
-
 function deleteCardClick(data) {
     cardToDelete = data
-    api.deleteCard(data._cardId)
-        .then(() => {
-            deleteCardPopup.open()
-        })
-        .catch(e => console.log('Ошибка при получении данных'))
+    deleteCardPopup.open()
 }
 
-// обработчик профиля и аватарки
+//удаляем карточку, закрываем попап
+function deleteCard() {
+    api.deleteCard(cardToDelete._cardId)
+    .then( () => {
+        cardToDelete.removeCard();
+        deleteCardPopup.close()
+    })
+}
+
 const profileInfo = new UserInfo('.profile__name', '.profile__description', '.profile__avatar');
-const profileSubmitHandler = () => {
-    profileInfo.setUserInfo(profileNameInput.value, profileDescriptionInput.value);
-    editProfileServ();
-    addEditProfileForm.close();
-}
-const avatarSubmitHandler = () => {
-    profileInfo.setUserAvatar(avatarInputLink.value);
-    sendAvatar();
-    addEditAvatarForm.close();
-}
 
-// удаляем лайк с сервера
-let dislike = null
-
-function removeLike(data) {
-    dislike = data
-    api.removeLike(data._cardId)
-        .then(result => {
-            dislike._element.querySelector('.element__like-counter').textContent = result.likes.length
-        })
+// отправляем данные профиля и обрабатываем их
+function profileSubmitHandler () {
+    addEditProfileForm.changeSubmitBtnCondition('Сохранение...');
+    api.editProfileInfo(profileNameInput.value, profileDescriptionInput.value)
+    .then(() => {
+        profileInfo.setUserInfo(profileNameInput.value, profileDescriptionInput.value)
+        addEditProfileForm.close()
+    })
         .catch(e => console.log('Ошибка при получении данных'))
+        .finally(() => addEditProfileForm.changeSubmitBtnCondition('Сохранить'))
+}
+
+// отправляем аватар на сервер и обрабатываем его
+function avatarSubmitHandler () {
+    addEditAvatarForm.changeSubmitBtnCondition('Сохранение...');
+    api.editAvatarInfo(avatarInputLink.value)
+    .then(() => {
+        profileInfo.setUserAvatar(avatarInputLink.value)
+        addEditAvatarForm.close()
+    })
+    .catch(e => console.log('Ошибка при получении данных'))
+    .finally(() => addEditAvatarForm.changeSubmitBtnCondition('Сохранить'))
 }
 
 // отправляем лайк на сервер
@@ -200,16 +177,32 @@ let like = null
 function addLike(data) {
     like = data
     api.sendLike(data._cardId)
-        .then(result => {
-            like._element.querySelector('.element__like-counter').textContent = result.likes.length
+        .then(() => {
+            like.addOneLike()
+            like.cardLikeToggle()
         })
         .catch(e => console.log('Ошибка при получении данных'))
 }
 
-Promise.all([api.getProfileInfo(), api.getCards()])
+// удаляем лайк с сервера
+let dislike = null
+
+function removeLike(data) {
+    dislike = data
+    api.removeLike(data._cardId)
+        .then(() => {
+            dislike.removeOneLike()
+            dislike.cardLikeToggle()
+        })
+        .catch(e => console.log('Ошибка при получении данных'))
+}
+
+    let userInfo = null
+    Promise.all([api.getProfileInfo(), api.getCards()])
     .then(([userData, cards]) => {
+        userInfo = userData._id
         profileInfo.setUserInfo(userData.name, userData.about)
         profileInfo.setUserAvatar(userData.avatar)
         cardSection.render(cards)
-    })
+        })
     .catch(e => console.log('Ошибка при получении данных'))
