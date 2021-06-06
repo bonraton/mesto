@@ -1,5 +1,5 @@
 export class Cards {
-    constructor(cardData, cardSelector, handleCardClick, deleteCardClick, addLike, removeLike) {
+    constructor(cardData, cardSelector, userId, handleCardClick, deleteCardClick, addLike, removeLike) {
         this._name = cardData.name;
         this._image = cardData.link;
         this._cardSelector = cardSelector;
@@ -11,6 +11,7 @@ export class Cards {
         this._deleteCardClick = deleteCardClick
         this._addLike = addLike;
         this._removeLike = removeLike;
+        this._userId = userId;
     }
 
     // Достаем разметку из template
@@ -26,11 +27,12 @@ export class Cards {
         like.classList.toggle('element__like_active');
     }
 
-    //проверяем наличие моего лайка в карточке
+    //проверяем массив лайков на наличие моего лайка
     hasLikedByMe() {
-        return this._likes.some((item) => {
-            return (item._id === "ad2870556030e9d944e8820b")
-        })
+        return (this._likes.some(like => {
+            console.log(like._id === this._userId)
+            return like._id === this._userId
+        }))
     }
 
     // отправляем/удаляем лайк с сервера
@@ -56,8 +58,8 @@ export class Cards {
     }
 
     // прячем кнопки удаления на карточках
-    _hideDeleteBtn(id) {
-        if (this._ownerId !== "ad2870556030e9d944e8820b") {
+    _hideDeleteBtn() {
+        if (this._ownerId !== this._userId) {
             this._element.querySelector('.element__delete-btn').classList.add('element__delete-btn_inactive');
         }
     }
@@ -68,7 +70,7 @@ export class Cards {
     }
 
     addOneLike() {
-        this._element.querySelector('.element__like-counter').textContent  = this._counterSpan += 1
+        this._element.querySelector('.element__like-counter').textContent = this._counterSpan += 1
     }
 
     removeOneLike() {
