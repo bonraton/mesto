@@ -1,47 +1,47 @@
-# Место.
-> Проектные работы 4,5,6 в программе обучения [Яндекс.Практикума](https://practicum.yandex.ru/) на курсе Веб-разработка.
+# Mesto.
+> > 4-9th projects on [Yandex.Practikum](https://practicum.yandex.ru/profile/web/) Web-development course.
 
-# Установка.
+# Installing.
 ```
-# Склонировать репозиторий
+# Clone repository
 git clone https://github.com/bonraton/mesto
 
-# Перейти в папку с проектом
+# Move to project folder
 cd mesto
 
-# Установить зависимости
+# Install dependencies
 npm i
 ```
 
-# Запуск.
-### Режим разработки.
+# Launch.
+### Developrt mode.
 ```
 npm run dev
 ```
-> запуск проекта на локальном сервере
+> Run a project on local server.
 
-### Сборка проекта.
+### Build a project.
 ``` 
 npm run build
 ```
-> Компиляция кода в директорию ```/dist```
+> Build a project to ```/dist```
 
-# Технологии.
-- Адаптивная верстка
-- БЭМ
+# Techs.
+- Adaptive design
+- BEM
 - Flexbox
 - Grid
-- JavaScript (Классы)
-- Валидация форма в реальном времени
-- Работа со слушателями
-- Сборщик: Webpack
+- JavaScript (Classes)
+- Realtime form validation
+- Event listeners
+- Webpack
 - JSON API
-- контроль версий: GIT
+- Version contol: GIT
 
-# Ссылки.
-- [Основной макет](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-- [Макет попапов](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1)
-- [Макет валидации форм](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)
+# Links.
+- [Main figma Layout](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+- [Popups laytout](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1)
+- [Validation layout](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)
 
 
 
